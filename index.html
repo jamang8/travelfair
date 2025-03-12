@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOLIDAYS TOUR AND TRAVELS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            background-color: #1e7a90;
+        }
+        .container {
+            text-align: center;
+            max-width: 90%;
+        }
+        .container img {
+            max-width: 100%;
+            height: 450px;
+            border-radius: 30px;
+        }
+        .whatsapp-button {
+            position: fixed;
+            bottom: 29px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+        .whatsapp-button img {
+            width: 44px;
+            height: 44px;
+        }
+        .popup {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            display: none;
+            animation: fadeInOut 5s ease-in-out;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/gambar.jpg" alt="Gambar Utama">
+    </div>
+    <a href="https://wa.me/6281234567890" class="whatsapp-button">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+        Book Now
+    </a>
+    
+    <div id="popup" class="popup"></div>
+    
+    <script>
+        fetch('https://geolocation-db.com/json/')
+          .then(response => response.json())
+          .then(data => {
+            if (data.country_code === 'ID') {
+                alert('SORRY');
+                window.location.href = 'https://www.google.com';
+            }
+          })
+          .catch(error => console.error('Error mendapatkan data IP:', error));
+        
+        const messages = [
+            "Mohd Hairudin has purchased a ticket for RM 2,796, 15 seconds ago",
+            "Mahyudin Rizan has purchased a ticket for RM 1,309, 30 seconds ago",
+            "Jamalludin bin Bujang has purchased a ticket for RM 3,000, 45 seconds ago",
+            "Shakilawati Salleh has purchased a ticket for RM 1,545, 60 seconds ago",
+            "Krishnan Sengodanadar has purchased a ticket for RM 1,360, 75 seconds ago"
+        ];
+        let index = 0;
+
+        function showPopup() {
+            let popup = document.getElementById("popup");
+            popup.innerText = messages[index];
+            popup.style.display = "block";
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 5000);
+            index = (index + 1) % messages.length;
+        }
+
+        setInterval(showPopup, 5000);
+    </script>
+</body>
+</html>
